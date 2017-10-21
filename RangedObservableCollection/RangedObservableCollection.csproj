@@ -4,7 +4,7 @@
     <TargetFramework>netstandard1.0</TargetFramework>
     <RootNamespace>System.Collections.ObjectModel</RootNamespace>
     <AssemblyName>System.Collections.ObjectModel.RangedObservableCollection</AssemblyName>
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\RangedObservableCollection.xml</DocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
     <Version>1.0.0</Version>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
