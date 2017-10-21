@@ -1,0 +1,72 @@
+---
+packages:
+- id: RangedObservableCollection
+  version: 1.0.0
+uti: com.xamarin.workbook
+id: 771a62d0-9764-4e3a-8642-1ae7ba5ad16a
+title: RangedObservableCollection
+platforms:
+- Console
+---
+
+```csharp
+#r "System.Collections.ObjectModel.RangedObservableCollection"
+```
+
+# RangedObservableCollection
+
+A small extension to ObservableCollection that allows for multiple items to be added, removed or replaced in a single operation.
+
+Like with all .NET libraries, we first need to add the using statement:
+
+```csharp
+using System.Collections.ObjectModel;
+```
+
+Now that is done, we can instantiate the collection:
+
+```csharp
+var collection = new RangedObservableCollection<int>();
+```
+
+Because this collection acts just like any ObservableCollection, there is not much to show… except for the awesome fact that adding a whole collection of items no longer meas that you get a whole lot of events. To show this, we are going to attach an event handler and print to the console each time there is an update:
+
+```csharp
+collection.CollectionChanged += (s, e) =>
+{
+    Console.WriteLine ("Event raised!");
+};
+```
+
+First we want to show the old way of doing things:
+
+```csharp
+var itemsToAdd = new [] { 1, 2, 3, 4, 5 };
+foreach (var item in itemsToAdd)
+{
+    collection.Add(item);
+}
+```
+
+Whoah! We just broke our UI (or rather we did a whole lot of work that was not necessary). Instead, we should be doing this:
+
+```csharp
+var itemsToAdd = new [] { 1, 2, 3, 4, 5 };
+collection.AddRange(itemsToAdd);
+```
+
+Boom! Only a single event and our UI is happy! Not only can we add in bulk, we can remove a whole lot of items in one go too:
+
+```csharp
+var itemsToRemove = new [] { 1, 2, 3, 4, 5 };
+collection.RemoveRange(itemsToRemove);
+```
+
+Again, just a single event. Finally, we can replace all the items in the collection in a single action, without having to clear the collections first:
+
+```csharp
+var itemsToAdd = new [] { 1, 2, 3, 4, 5 };
+collection.ReplaceRange(itemsToAdd);
+```
+
+As you can see, just a single event. Now go forth and conquer!
