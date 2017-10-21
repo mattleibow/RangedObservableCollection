@@ -8,7 +8,7 @@ build:
   verbosity: minimal
 
 test_script:
- - '%xunit20%\xunit.console %APPVEYOR_BUILD_FOLDER%\RangedObservableCollection.Tests\bin\Debug\netcoreapp2.0\RangedObservableCollection.Tests.dll -appveyor'
+ - dotnet test RangedObservableCollection.Tests
 
 nuget:
   disable_publish_on_pr: true
