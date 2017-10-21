@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.0</TargetFramework>
+    <RootNamespace>System.Collections.ObjectModel</RootNamespace>
+    <AssemblyName>System.Collections.ObjectModel.RangedObservableCollection</AssemblyName>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\RangedObservableCollection.xml</DocumentationFile>
+    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Copyright>Copyright © Matthew Leibowitz</Copyright>
+    <PackageId>RangedObservableCollection</PackageId>
+    <PackageProjectUrl>https://github.com/mattleibow/RangedObservableCollection</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/mattleibow/RangedObservableCollection/blob/master/LICENSE</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/mattleibow/RangedObservableCollection</RepositoryUrl>
+    <Description>A small extension to ObservableCollection that allows for multiple items to be added, removed or replaced in a single operation.</Description>
+    <PackageTags>ObservableCollection,AddRange,ReplaceRange,RemoveRange,RangedObservableCollection</PackageTags>
+    <Authors>Matthew Leibowitz</Authors>
+    <Company>Matthew Leibowitz</Company>
+  </PropertyGroup>
+
+</Project>
