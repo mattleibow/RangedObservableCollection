@@ -60,8 +60,8 @@ namespace System.Collections.ObjectModel
 			foreach (var i in changedItems)
 				Items.Add(i);
 
-			OnPropertyChanged(new PropertyChangedEventArgs(CountName));
-			OnPropertyChanged(new PropertyChangedEventArgs(IndexerName));
+			OnCountPropertyChanged();
+			OnIndexerPropertyChanged();
 			OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, changedItems, startIndex));
 		}
 
@@ -81,16 +81,13 @@ namespace System.Collections.ObjectModel
 
 			CheckReentrancy();
 
-			var oldItems = new List<T>(Items);
-			var changedItems = new List<T>(collection);
-
 			Items.Clear();
-			foreach (var i in changedItems)
+			foreach (var i in collection)
 				Items.Add(i);
 
-			OnPropertyChanged(new PropertyChangedEventArgs(CountName));
-			OnPropertyChanged(new PropertyChangedEventArgs(IndexerName));
-			OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, changedItems, oldItems));
+			OnCountPropertyChanged();
+			OnIndexerPropertyChanged();
+			OnCollectionReset();
 		}
 
 		/// <summary>
@@ -121,8 +118,8 @@ namespace System.Collections.ObjectModel
 
 			if (changedItems.Count > 0)
 			{
-				OnPropertyChanged(new PropertyChangedEventArgs(CountName));
-				OnPropertyChanged(new PropertyChangedEventArgs(IndexerName));
+				OnCountPropertyChanged();
+				OnIndexerPropertyChanged();
 				OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, changedItems));
 			}
 		}
@@ -135,15 +132,34 @@ namespace System.Collections.ObjectModel
 		{
 			CheckReentrancy();
 
-			var oldItems = new List<T>(Items);
-			var changedItems = new List<T> { item };
-
 			Items.Clear();
 			Items.Add(item);
 
-			OnPropertyChanged(new PropertyChangedEventArgs(CountName));
-			OnPropertyChanged(new PropertyChangedEventArgs(IndexerName));
-			OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, changedItems, oldItems));
+			OnCountPropertyChanged();
+			OnIndexerPropertyChanged();
+			OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+		}
+
+		private void OnCountPropertyChanged()
+		{
+			OnPropertyChanged(EventArgsCache.CountPropertyChanged);
+		}
+
+		private void OnIndexerPropertyChanged()
+		{
+			OnPropertyChanged(EventArgsCache.IndexerPropertyChanged);
+		}
+
+		private void OnCollectionReset()
+		{
+			OnCollectionChanged(EventArgsCache.ResetCollectionChanged);
+		}
+
+		private static class EventArgsCache
+		{
+			internal static readonly PropertyChangedEventArgs CountPropertyChanged = new PropertyChangedEventArgs(CountName);
+			internal static readonly PropertyChangedEventArgs IndexerPropertyChanged = new PropertyChangedEventArgs(IndexerName);
+			internal static readonly NotifyCollectionChangedEventArgs ResetCollectionChanged = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset);
 		}
 	}
 }

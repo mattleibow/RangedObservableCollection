@@ -71,9 +71,9 @@ namespace RangedObservableCollection.Tests
 
 			collection.CollectionChanged += (s, e) =>
 			{
-				Assert.Equal(NotifyCollectionChangedAction.Replace, e.Action);
-				Assert.Equal(ItemsToAdd, e.OldItems);
-				Assert.Equal(new[] { 11 }, e.NewItems);
+				Assert.Equal(NotifyCollectionChangedAction.Reset, e.Action);
+				Assert.Null(e.OldItems);
+				Assert.Null(e.NewItems);
 			};
 
 			collection.Replace(11);
@@ -107,9 +107,9 @@ namespace RangedObservableCollection.Tests
 
 			collection.CollectionChanged += (s, e) =>
 			{
-				Assert.Equal(NotifyCollectionChangedAction.Replace, e.Action);
-				Assert.Equal(ItemsToAdd, e.OldItems);
-				Assert.Equal(AlternateItemsToAdd, e.NewItems);
+				Assert.Equal(NotifyCollectionChangedAction.Reset, e.Action);
+				Assert.Null(e.OldItems);
+				Assert.Null(e.NewItems);
 			};
 
 			collection.ReplaceRange(AlternateItemsToAdd);
